@@ -39,3 +39,6 @@
 
 /* v0.7.0 — branded launch splash */
 body.splash-active{overflow:hidden}.splash-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;background:var(--green);color:#fff;opacity:1;visibility:visible;transition:opacity .45s ease,visibility .45s ease}.splash-screen.is-leaving{opacity:0;visibility:hidden;pointer-events:none}.splash-glow{position:absolute;width:min(118vw,620px);aspect-ratio:1;border:clamp(55px,14vw,105px) solid rgba(184,239,220,.12);border-radius:50%;transform:translate(36%,-35%)}.splash-content{position:relative;z-index:1;text-align:center;animation:splashRise .7s cubic-bezier(.2,.8,.2,1) both}.splash-content img{display:block;width:clamp(112px,32vw,168px);aspect-ratio:1;margin:0 auto 20px;border-radius:30%;box-shadow:0 22px 55px rgba(8,31,25,.32)}.splash-content h1{margin:0;font:800 clamp(42px,12vw,66px)/1 Manrope,sans-serif;letter-spacing:-.055em}.splash-content p{margin:12px 0 0;color:var(--mint);font-size:13px;font-weight:700;letter-spacing:.045em}@keyframes splashRise{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.splash-screen{transition-duration:.01ms}.splash-content{animation:none}}
+
+/* v0.7.1 — four-item primary navigation */
+.bottom-nav button{width:25%}

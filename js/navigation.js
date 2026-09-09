@@ -1,5 +1,8 @@
-const FLEX_VERSION='0.5.0';
+const FLEX_VERSION='0.7.0';
 const changelog=[
+ {version:'0.7.0',name:'Launch Experience',date:'9 september 2026',items:['Ny startscen med Flex-logotypen · New launch scene with the Flex logo','Mjuk övergång till appen · Smooth transition into the app','Anpassning för minskad rörelse · Reduced-motion support']},
+ {version:'0.6.1',name:'Card & Profile Polish',date:'8 september 2026',items:['Hela demonstrationsbilden syns nu i övningskorten · Full demonstration images now fit inside exercise cards','Profilmarkeringen visar initialerna RM · The profile badge now shows the initials RM']},
+ {version:'0.6.0',name:'App Identity',date:'8 september 2026',items:['Ny grön Flex-logotyp · New green Flex logo','Appikoner för iPhone och installerbar webbapp · App icons for iPhone and installable web app','Ny favicon och logotyp i toppfältet · New favicon and header logo']},
  {version:'0.5.0',name:'Navigation & Programs',date:'8 september 2026',items:['Ny navigation med fem riktiga appskärmar','Skapa, redigera och spara egna träningsprogram','Repetitioner eller tid per övning','Språkval och versionshistorik flyttade till Inställningar','Problemområden flyttade till skärmen Hjälp']},
  {version:'0.4.0',name:'The Bigger Library',date:'7 september 2026',items:['52 nya övningar inom 13 nya kategorier','Totalt 65 övningar','Rekommendationer efter smärta, stelhet och svaghet','Textkort för övningar utan bilder']},
  {version:'0.3.0',name:'Connected Movement',date:'6 september 2026',items:['Klickbara lättare och svårare variationer','Relaterade övningar efter muskelgrupp och position','Utzoomade thumbnails']},
@@ -43,3 +46,8 @@ document.querySelector('#saveProgram').onclick=()=>{const name=document.querySel
 document.querySelector('#programList').onclick=event=>{if(event.target.closest('[data-new-program]'))openBuilder();const edit=event.target.closest('[data-edit-program]');if(edit)openBuilder(programs.find(x=>x.id===edit.dataset.editProgram));const del=event.target.closest('[data-delete-program]');if(del){programs=programs.filter(x=>x.id!==del.dataset.deleteProgram);persistPrograms()}};
 document.querySelector('#homePrograms').onclick=event=>{const card=event.target.closest('[data-program-id]');if(card){goTo('programs');openBuilder(programs.find(x=>x.id===card.dataset.programId))}};
 renderPrograms();renderHomePrograms();goTo(location.hash.slice(1)||'home',false);
+
+const splashScreen=document.querySelector('#splashScreen');
+function dismissSplash(){if(!splashScreen||splashScreen.classList.contains('is-leaving'))return;splashScreen.classList.add('is-leaving');document.body.classList.remove('splash-active');window.setTimeout(()=>splashScreen.remove(),500)}
+window.addEventListener('load',()=>window.setTimeout(dismissSplash,950),{once:true});
+window.setTimeout(dismissSplash,2600);

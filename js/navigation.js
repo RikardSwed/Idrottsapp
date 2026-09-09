@@ -1,5 +1,6 @@
-const FLEX_VERSION='0.7.0';
+const FLEX_VERSION='0.7.1';
 const changelog=[
+ {version:'0.7.1',name:'Navigation Space',date:'9 september 2026',items:['Profil borttagen från bottennavigationen · Profile removed from bottom navigation','Fyra huvudval får mer utrymme · Four primary destinations get more space','Profilen nås fortsatt via RM-knappen · Profile remains available through the RM button']},
  {version:'0.7.0',name:'Launch Experience',date:'9 september 2026',items:['Ny startscen med Flex-logotypen · New launch scene with the Flex logo','Mjuk övergång till appen · Smooth transition into the app','Anpassning för minskad rörelse · Reduced-motion support']},
  {version:'0.6.1',name:'Card & Profile Polish',date:'8 september 2026',items:['Hela demonstrationsbilden syns nu i övningskorten · Full demonstration images now fit inside exercise cards','Profilmarkeringen visar initialerna RM · The profile badge now shows the initials RM']},
  {version:'0.6.0',name:'App Identity',date:'8 september 2026',items:['Ny grön Flex-logotyp · New green Flex logo','Appikoner för iPhone och installerbar webbapp · App icons for iPhone and installable web app','Ny favicon och logotyp i toppfältet · New favicon and header logo']},

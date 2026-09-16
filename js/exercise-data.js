@@ -132,12 +132,7 @@
     x('qigong-gather','Samla och sänka','Gather and lower','Qi gong','Stående',['Andning','Helkropp'],['Nacke','Axlar','Höfter'],['Avslappning','Koordination'],['För händerna utåt och uppåt med en lugn inandning.','Samla dem framför kroppen.','Sänk med en långsam utandning.'],['Move the hands outward and upward with a calm inhale.','Gather them in front of the body.','Lower with a slow exhale.']),
     x('relax-hand-shake','Mjuk handskakning','Gentle hand shake','Handträning','Sittande',['Händer','Underarmar'],['Händer','Handleder'],['Avslappning','Rörlighet'],['Låt underarmarna vila.','Skaka händerna mycket mjukt.','Pausa och känn att greppet slappnar av.'],['Let the forearms rest.','Shake the hands very gently.','Pause and notice the grip relaxing.'])
   ];
-  globalThis.flexIllustrationPilot={
-    squat:'assets/illustrations/squat-female.svg',
-    birddog:'assets/illustrations/bird-dog-male.svg',
-    bridge:'assets/illustrations/bridge-female.svg',
-    'shoulder-wall-slide':'assets/illustrations/wall-slide-male.svg',
-    'neck-rotation':'assets/illustrations/neck-rotation-female.svg',
-    'balance-tandem':'assets/illustrations/tandem-balance-male.svg'
+  globalThis.flexIllustrations={
+    squat:'assets/illustrations/squat-female-flat.webp'
   };
 })();

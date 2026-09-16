@@ -1,7 +1,7 @@
 # Flex – projektdokumentation
 
-Senast uppdaterad: 9 september 2026  
-Aktuell version: **0.7.1 – Navigation Space**
+Senast uppdaterad: 15 september 2026  
+Aktuell version: **0.14.0 – Compressed Illustration Test**
 
 ## 1. Produktvision
 
@@ -19,17 +19,30 @@ Den långsiktiga produkten ska:
 
 ## 2. Nuvarande produkt
 
-Version 0.7.1 innehåller fem appskärmar:
+Version 0.14.0 innehåller sex appskärmar:
 
 1. **Hem** – introduktion, genvägar och användarens program.
-2. **Utforska** – sökning, kategorier, bild- eller listvy och hela övningsbanken.
-3. **Program** – skapa, redigera och ta bort egna träningsprogram.
-4. **Hjälp** – rekommendationer utifrån smärta/stelhet eller önskat styrkeområde.
-5. **Profil/Inställningar** – språk, versionsnummer och versionshistorik.
+2. **Utforska** – textsökning, kategorier, stegvis guidad sökning, bild- eller listvy och hela övningsbanken.
+3. **Program** – använd färdiga fokusprogram, filtrera övningar efter behov eller skapa, redigera och ta bort egna träningsprogram.
+4. **Studera** – teoretisk kunskapsträning om övningsnamn, fokusområden och val av övning.
+5. **Min träning** – logga genomförda pass, repetitioner, set, vikt och anteckningar samt skapa personliga mål och följa progression.
+6. **Profil/Inställningar** – språk, versionsnummer och versionshistorik.
 
-Bottennavigationen visar de fyra primära destinationerna Hem, Utforska, Program och Hjälp. Profil/Inställningar nås via RM-knappen i toppfältet, vilket ger huvudvalen större tryckytor utan att ta bort någon skärm.
+Bottennavigationen visar de fyra primära destinationerna Hem, Utforska, Program och Studera. Profil/Inställningar nås via RM-knappen i toppfältet. Det tidigare Hjälp-innehållet är integrerat i den guidade sökningen under Utforska.
 
-Övningsbanken innehåller 65 grundövningar. Den täcker bland annat styrka, rörlighet, yoga, Pilates, Qi gong, Tai chi, ögon, nacke, händer, fötter, hållning, ansikte, stretching, Pilatesboll och Pilatesrulle.
+Den guidade sökningen börjar med ett perspektiv: smärta/stelhet, upplevd svaghet, hållning, rörlighet, balans/kontroll eller avslappning. Användaren väljer därefter område och får en filtrerad samling. Samma metadata och matchningsprincip används i programbyggarens behovsfilter. Rekommendationerna är fortsatt allmän information och inte diagnos eller behandling.
+
+Study är en första lokal studiemiljö utan ny lagringsnyckel. Användaren väljer ämne och därefter ett av tre lägen: memorera svenska/engelska namn, identifiera fokusområde eller välja en övning för ett angivet område. Frågor skapas från den befintliga övningsdatan så att studiematerialet följer biblioteket.
+
+Från övningens detaljvy finns en Studera-knapp. Den öppnar Studera med den valda övningen som första fråga och upp till nio närliggande övningar med gemensam muskelgrupp eller kategori som fortsatt frågeunderlag. Användaren väljer sedan ett av de tre befintliga lägena. Inga nya lagringsnycklar eller övningsbilder tillkommer.
+
+Färdiga program finns för hela kroppen, rygg, ben och säte, träning utan redskap samt träning med redskap. Lätt, medel och utmanande nivå räknar om set och repetitioner direkt. Färdiga program ligger i appkoden och sparas inte i `localStorage` förrän användaren väljer att skapa en egen kopia. Från en övningsdetalj kan övningen läggas till i ett befintligt eget program eller i en ny kopia av ett färdigt program.
+
+Tre färdiga uppvärmningsprogram kompletterar styrkeprogrammen: dynamisk helkroppsstart, mjuk rygg och axlar samt ben och höfter i gång. De använder samma inbyggda preset-modell och svårighetsval som övriga program.
+
+Min träning nås från Hem, Program och Utforska. Genomförda pass sparas i `flex-workouts` med datum, programnamn, övnings-ID, set, repetitioner, vikt och anteckning. Mål sparas separat i `flex-goals` med text, valfritt måldatum och slutförd-status. Progression beräknas vid visning mot föregående registrerade resultat för samma övning. Befintliga lagringsformat ändras inte.
+
+Övningsbanken innehåller 125 övningar. Den täcker bland annat styrka, rörlighet, yoga, Pilates, Qi gong, Tai chi, ögon, nacke, händer, fötter, hållning, ansikte, stretching, Pilatesboll och Pilatesrulle. Version 0.10.0 lägger särskild vikt vid bred täckning i den guidade sökningen: varje val ger flera relevanta övningar, inklusive kombinationer som hållning och höfter.
 
 ## 3. Filer och ansvar
 
@@ -54,20 +67,22 @@ Det ursprungliga övningsbiblioteket och logik för:
 - variationer;
 - relaterade övningar;
 - problemområden och styrkerekommendationer.
+- guidad sökning och gemensam behovsmatchning för Utforska och Program.
 
 ### `js/exercise-data.js`
 
-52 senare tillagda övningar utan bilder. De läggs till i `globalThis.flexAdditionalExercises` och slås samman med grunddata i `app.js`.
+112 senare tillagda övningar utan bilder. De läggs till i `globalThis.flexAdditionalExercises` och slås samman med de 13 ursprungliga bildsatta övningarna i `app.js`.
 
 ### `js/navigation.js`
 
 Logik för:
 
-- de fem appskärmarna och URL-hashar;
+- de sex appskärmarna och URL-hashar;
 - versionshistorik;
 - programbyggaren;
 - lagring, redigering och borttagning av program;
 - visning av program på hemskärmen.
+- Study-flöde, frågor, svar och återkoppling.
 
 ### `assets/exercises/`
 
@@ -123,7 +138,9 @@ Flex använder webbläsarens `localStorage`:
 | `flex-language` | `both`, `sv` eller `en` |
 | `flex-view` | `cards` eller `list` |
 | `flex-saved` | Lista med sparade övnings-id:n |
-| `flex-programs` | Användarens egna träningsprogram |
+| `flex-programs` | Användarens egna träningsprogram; övningsposter kan även ha det bakåtkompatibla, valfria fältet `sets` |
+| `flex-workouts` | Genomförda pass med datum, namn, anteckning och övningsresultat för set, repetitioner och vikt |
+| `flex-goals` | Personliga mål med text, valfritt måldatum och slutförd-status |
 
 Informationen synkroniseras inte mellan enheter och försvinner om webbläsarens lokala data rensas. En framtida version behöver en databas eller iCloud-lösning om användaren ska kunna byta enhet.
 
@@ -132,6 +149,18 @@ Informationen synkroniseras inte mellan enheter och försvinner om webbläsarens
 Nuvarande 39 PNG-bilder väger tillsammans cirka 23 MB, ungefär 0,59 MB per bild eller 1,77 MB per övning med tre steg.
 
 Den senaste thumbnail-ändringen förändrade endast hur bilden visas i CSS. Den komprimerade inte filerna.
+
+### Illustrationspilot
+
+`docs/illustration-pilot/` innehåller ett fristående pilotprov med sex linjebaserade trestegsövningar i SVG. Provet täcker stående, fyrfota, liggande, väggstödd, sittande och balanserande rörelse. De sex filerna är tillsammans 6 154 byte, cirka 1 KB per övning. Detta är ett tekniskt och visuellt prov, inte produktionsbilder, och filerna är inte kopplade till appens övningsdata.
+
+Piloten visar att SVG-utrymme inte är den begränsande faktorn i den valda detaljnivån. Nästa beslut bör därför prioritera begriplighet, biomekanisk kvalitetssäkring, anatomisk detalj, pilar och redskap. Ett försiktigt produktionsmål är 5–20 KB per övning, motsvarande cirka 1–4 MB för 200 övningar.
+
+Den platta vektorstilen är vald som fortsatt riktning. `docs/illustration-pilot/flat-vector-gender-reference.png` dokumenterar en gemensam kvinnlig och manlig figur. Rasterfilen är endast en stilreferens och ska inte kopplas in i appen. Produktionsillustrationer ska vara riktiga SVG-filer. Figuren ska fördelas deterministiskt efter övnings-ID, ungefär 50/50 mellan manlig och kvinnlig figur, så att en övning alltid behåller samma figur.
+
+Version 0.13.0 kopplar in den första produktionsserien: knäböj, fågelhund, höftlyft, underarmsglidning mot vägg, nackrotation och tandemstående. Serien har tre kvinnliga och tre manliga figurer och väger totalt 7 589 byte. SVG-filerna ersätter bildkällan endast för dessa sex övningar; övriga bilder och textkort fungerar som tidigare. Detalj- och relaterade vyer använder `object-fit: contain` för SVG så att trestegsbilderna inte beskärs.
+
+Efter visuell granskning bedömdes SVG-serien vara för primitiv jämfört med den valda stilreferensen. Version 0.14.0 kopplar därför bort dessa sex SVG-filer från appens övningsdata och testar den polerade platta stilen som WebP och AVIF. `docs/illustration-quality-test/` innehåller en mobilanpassad jämförelse. WebP i 480 × 480 och kvalitet 82 rekommenderas: kvinnlig och manlig testbild är cirka 13 KB vardera. Endast knäböj använder WebP-provet i appen tills kvaliteten har godkänts.
 
 Ungefärlig storlek med nuvarande PNG-metod:
 
@@ -196,6 +225,14 @@ Vid varje uppdatering ska svaret i Codex-tråden tydligt ange versionsnummer och
 
 ## 11. Versionshistorik
 
+- **0.14.0 – Compressed Illustration Test:** primitiva SVG-bilder bortkopplade, polerad platt stil jämförd som WebP och AVIF och ett cirka 13 KB stort 480-pixelsprov integrerat för knäböj.
+- **0.13.0 – Inclusive Illustration System:** första sex platta SVG-instruktionerna integrerade, jämnt fördelade mellan kvinnlig och manlig figur och tillsammans cirka 7,6 KB.
+- **0.12.0 – Personal Training Log:** tre uppvärmningsprogram, en personlig träningssida med pass- och mållagring samt jämförelser av repetitioner och vikt mot föregående registrering.
+- **0.11.0 – Exercise Study:** den fjärde bottenknappen heter Studera; varje övningsdetalj har en Studera-knapp som startar ett fokuserat kunskapsläge utifrån den valda övningen och närliggande rörelser.
+- **0.10.0 – Deep Exercise Library:** 60 nya tvåspråkiga övningar ger totalt 125. Metadata för problemområden och träningsbehov har breddats så att varje val i den guidade sökningen ger flera relevanta träffar, utan att nya bilder eller lagringsformat tillkommer.
+- **0.9.0 – Guided Search & Study:** Hjälp integrerad som en stegvis guidad sökning i Utforska, behovsfilter tillagt i programbyggaren och en ny Study-flik med ämnesval och tre kunskapslägen.
+- **0.8.1 – Explore Image Fit:** porträttbilder centreras i naturliga proportioner inom bildytan på Utforska-korten och får tydliga maxgränser för både bredd och höjd; övriga bildvyer påverkas inte.
+- **0.8.0 – Programs & iPhone Polish:** färdiga fokusprogram med svårighetsval, direkt tillägg från övningsdetaljer samt förbättrad safe area, zoomkontroll, sidbredd och bildpassning på iPhone.
 - **0.7.1 – Navigation Space:** Profil flyttad bort från bottennavigationen; de fyra huvudvalen har fått mer utrymme och Inställningar nås via RM-knappen.
 - **0.7.0 – Launch Experience:** en tvåspråkig startscen med Flex-logotypen, mjuk övergång och stöd för minskad rörelse.
 - **0.6.1 – Card & Profile Polish:** övningskort visar hela demonstrationsbilden med extra luft och profilmarkeringarna visar initialerna RM.

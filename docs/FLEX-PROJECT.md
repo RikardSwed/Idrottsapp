@@ -1,7 +1,7 @@
 # Flex – projektdokumentation
 
 Senast uppdaterad: 15 september 2026  
-Aktuell version: **0.14.0 – Compressed Illustration Test**
+Aktuell version: **0.15.0 – Swipeable Illustration Steps**
 
 ## 1. Produktvision
 
@@ -19,7 +19,7 @@ Den långsiktiga produkten ska:
 
 ## 2. Nuvarande produkt
 
-Version 0.14.0 innehåller sex appskärmar:
+Version 0.15.0 innehåller sex appskärmar:
 
 1. **Hem** – introduktion, genvägar och användarens program.
 2. **Utforska** – textsökning, kategorier, stegvis guidad sökning, bild- eller listvy och hela övningsbanken.
@@ -152,15 +152,17 @@ Den senaste thumbnail-ändringen förändrade endast hur bilden visas i CSS. Den
 
 ### Illustrationspilot
 
-`docs/illustration-pilot/` innehåller ett fristående pilotprov med sex linjebaserade trestegsövningar i SVG. Provet täcker stående, fyrfota, liggande, väggstödd, sittande och balanserande rörelse. De sex filerna är tillsammans 6 154 byte, cirka 1 KB per övning. Detta är ett tekniskt och visuellt prov, inte produktionsbilder, och filerna är inte kopplade till appens övningsdata.
+Det första fristående SVG-provet visade att mycket små filer var möjliga men bedömdes vara visuellt för primitivt. Pilotmaterialet ligger därför utanför appmappen i `Flex-image-archive/` och kopplas inte till appens övningsdata.
 
 Piloten visar att SVG-utrymme inte är den begränsande faktorn i den valda detaljnivån. Nästa beslut bör därför prioritera begriplighet, biomekanisk kvalitetssäkring, anatomisk detalj, pilar och redskap. Ett försiktigt produktionsmål är 5–20 KB per övning, motsvarande cirka 1–4 MB för 200 övningar.
 
-Den platta vektorstilen är vald som fortsatt riktning. `docs/illustration-pilot/flat-vector-gender-reference.png` dokumenterar en gemensam kvinnlig och manlig figur. Rasterfilen är endast en stilreferens och ska inte kopplas in i appen. Produktionsillustrationer ska vara riktiga SVG-filer. Figuren ska fördelas deterministiskt efter övnings-ID, ungefär 50/50 mellan manlig och kvinnlig figur, så att en övning alltid behåller samma figur.
+Den platta illustrationsstilen är vald som fortsatt riktning. Stilreferenser och komprimeringstester ligger utanför appmappen i `Flex-image-archive/` och ska inte laddas upp tillsammans med appen. Figuren ska fördelas ungefär 50/50 mellan manlig och kvinnlig figur, och varje övning behåller samma figur.
 
 Version 0.13.0 kopplar in den första produktionsserien: knäböj, fågelhund, höftlyft, underarmsglidning mot vägg, nackrotation och tandemstående. Serien har tre kvinnliga och tre manliga figurer och väger totalt 7 589 byte. SVG-filerna ersätter bildkällan endast för dessa sex övningar; övriga bilder och textkort fungerar som tidigare. Detalj- och relaterade vyer använder `object-fit: contain` för SVG så att trestegsbilderna inte beskärs.
 
-Efter visuell granskning bedömdes SVG-serien vara för primitiv jämfört med den valda stilreferensen. Version 0.14.0 kopplar därför bort dessa sex SVG-filer från appens övningsdata och testar den polerade platta stilen som WebP och AVIF. `docs/illustration-quality-test/` innehåller en mobilanpassad jämförelse. WebP i 480 × 480 och kvalitet 82 rekommenderas: kvinnlig och manlig testbild är cirka 13 KB vardera. Endast knäböj använder WebP-provet i appen tills kvaliteten har godkänts.
+Efter visuell granskning bedömdes SVG-serien vara för primitiv jämfört med den valda stilreferensen. Version 0.14.0 kopplade därför bort dessa SVG-filer och testade den polerade platta stilen som WebP och AVIF. WebP i 480 × 480 och kvalitet 82 valdes som standard.
+
+Version 0.15.0 delar åter varje instruktion i tre separata 480 × 480 WebP-filer, så att användaren sveper sidledes mellan stegen precis som med de ursprungliga PNG-bilderna. Knäböj, fågelhund, höftlyft och underarmsglidning mot vägg har nya serier, två med kvinnlig och två med manlig figur. De tolv filerna är tillsammans 65 436 byte. Alla gamla pilot-, referens- och jämförelsebilder har flyttats utanför `Flex` till `Flex-image-archive/` och följer därför inte med när appmappen laddas upp.
 
 Ungefärlig storlek med nuvarande PNG-metod:
 
@@ -225,6 +227,7 @@ Vid varje uppdatering ska svaret i Codex-tråden tydligt ange versionsnummer och
 
 ## 11. Versionshistorik
 
+- **0.15.0 – Swipeable Illustration Steps:** fyra övningar har vardera tre separata WebP-steg för sidscrollning; gamla pilotfiler har flyttats utanför appmappen.
 - **0.14.0 – Compressed Illustration Test:** primitiva SVG-bilder bortkopplade, polerad platt stil jämförd som WebP och AVIF och ett cirka 13 KB stort 480-pixelsprov integrerat för knäböj.
 - **0.13.0 – Inclusive Illustration System:** första sex platta SVG-instruktionerna integrerade, jämnt fördelade mellan kvinnlig och manlig figur och tillsammans cirka 7,6 KB.
 - **0.12.0 – Personal Training Log:** tre uppvärmningsprogram, en personlig träningssida med pass- och mållagring samt jämförelser av repetitioner och vikt mot föregående registrering.

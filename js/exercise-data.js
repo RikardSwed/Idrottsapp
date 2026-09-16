@@ -133,6 +133,9 @@
     x('relax-hand-shake','Mjuk handskakning','Gentle hand shake','Handträning','Sittande',['Händer','Underarmar'],['Händer','Handleder'],['Avslappning','Rörlighet'],['Låt underarmarna vila.','Skaka händerna mycket mjukt.','Pausa och känn att greppet slappnar av.'],['Let the forearms rest.','Shake the hands very gently.','Pause and notice the grip relaxing.'])
   ];
   globalThis.flexIllustrations={
-    squat:'assets/illustrations/squat-female-flat.webp'
+    squat:['assets/illustrations/squat-female-1.webp','assets/illustrations/squat-female-2.webp','assets/illustrations/squat-female-3.webp'],
+    birddog:['assets/illustrations/birddog-male-1.webp','assets/illustrations/birddog-male-2.webp','assets/illustrations/birddog-male-3.webp'],
+    bridge:['assets/illustrations/bridge-female-1.webp','assets/illustrations/bridge-female-2.webp','assets/illustrations/bridge-female-3.webp'],
+    'shoulder-wall-slide':['assets/illustrations/shoulder-wall-slide-male-1.webp','assets/illustrations/shoulder-wall-slide-male-2.webp','assets/illustrations/shoulder-wall-slide-male-3.webp']
   };
 })();

@@ -2,7 +2,7 @@
 
 Flex är en mobilanpassad, tvåspråkig träningswebbapp. Målet är att skapa ett stort, lättnavigerat övningsbibliotek som senare kan paketeras som en iPhone-app med Capacitor och Xcode.
 
-Aktuell version: **0.14.0 – Compressed Illustration Test**
+Aktuell version: **0.15.0 – Swipeable Illustration Steps**
 
 ## Öppna appen
 
@@ -12,8 +12,6 @@ Appen är byggd med vanlig HTML, CSS och JavaScript och har inget byggsteg. Star
 
 - [Full projektdokumentation](docs/FLEX-PROJECT.md)
 - [Handoff till en ny Codex-uppgift](docs/HANDOFF.md)
-- [Illustrationspilot för små SVG-filer](docs/illustration-pilot/index.html)
-- [Kvalitets- och komprimeringstest för WebP och AVIF](docs/illustration-quality-test/index.html)
 
 ## Projektstruktur
 

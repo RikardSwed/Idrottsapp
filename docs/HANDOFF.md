@@ -16,7 +16,7 @@ Läs först följande filer helt innan du ändrar något:
 - `Flex/js/exercise-data.js`
 - `Flex/js/navigation.js`
 
-Aktuell version är **0.14.0 – Compressed Illustration Test**. Börja varje statusuppdatering och slutleverans med den version som arbetet gäller. Uppdatera versionsnumret i hemskärmen, Inställningar, versionshistoriken och dokumentationen när en ny version görs.
+Aktuell version är **0.15.0 – Swipeable Illustration Steps**. Börja varje statusuppdatering och slutleverans med den version som arbetet gäller. Uppdatera versionsnumret i hemskärmen, Inställningar, versionshistoriken och dokumentationen när en ny version görs.
 
 Flex är en mobilanpassad tvåspråkig träningswebbapp med 125 övningar, sex navigerbara skärmar, rekommendationer efter problemområde, egna program samt en personlig träningslogg med mål och progression. Den är byggd med vanlig HTML, CSS och JavaScript och använder `localStorage`.
 

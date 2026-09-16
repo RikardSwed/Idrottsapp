@@ -136,6 +136,9 @@
     squat:['assets/illustrations/squat-female-1.webp','assets/illustrations/squat-female-2.webp','assets/illustrations/squat-female-3.webp'],
     birddog:['assets/illustrations/birddog-male-1.webp','assets/illustrations/birddog-male-2.webp','assets/illustrations/birddog-male-3.webp'],
     bridge:['assets/illustrations/bridge-female-1.webp','assets/illustrations/bridge-female-2.webp','assets/illustrations/bridge-female-3.webp'],
-    'shoulder-wall-slide':['assets/illustrations/shoulder-wall-slide-male-1.webp','assets/illustrations/shoulder-wall-slide-male-2.webp','assets/illustrations/shoulder-wall-slide-male-3.webp']
+    'shoulder-wall-slide':['assets/illustrations/shoulder-wall-slide-male-1.webp','assets/illustrations/shoulder-wall-slide-male-2.webp','assets/illustrations/shoulder-wall-slide-male-3.webp'],
+    lunge:['assets/illustrations/lunge-male-1.webp','assets/illustrations/lunge-male-2.webp','assets/illustrations/lunge-male-3.webp'],
+    pushup:['assets/illustrations/pushup-female-1.webp','assets/illustrations/pushup-female-2.webp','assets/illustrations/pushup-female-3.webp'],
+    calf:['assets/illustrations/calf-male-1.webp','assets/illustrations/calf-male-2.webp','assets/illustrations/calf-male-3.webp']
   };
 })();

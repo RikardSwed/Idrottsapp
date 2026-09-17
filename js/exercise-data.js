@@ -139,6 +139,21 @@
     'shoulder-wall-slide':['assets/illustrations/shoulder-wall-slide-male-1.webp','assets/illustrations/shoulder-wall-slide-male-2.webp','assets/illustrations/shoulder-wall-slide-male-3.webp'],
     lunge:['assets/illustrations/lunge-male-1.webp','assets/illustrations/lunge-male-2.webp','assets/illustrations/lunge-male-3.webp'],
     pushup:['assets/illustrations/pushup-female-1.webp','assets/illustrations/pushup-female-2.webp','assets/illustrations/pushup-female-3.webp'],
-    calf:['assets/illustrations/calf-male-1.webp','assets/illustrations/calf-male-2.webp','assets/illustrations/calf-male-3.webp']
+    calf:['assets/illustrations/calf-male-1.webp','assets/illustrations/calf-male-2.webp','assets/illustrations/calf-male-3.webp'],
+    plank:['assets/illustrations/plank-female-1.webp','assets/illustrations/plank-female-2.webp','assets/illustrations/plank-female-3.webp'],
+    deadbug:['assets/illustrations/deadbug-male-1.webp','assets/illustrations/deadbug-male-2.webp','assets/illustrations/deadbug-male-3.webp'],
+    row:['assets/illustrations/row-female-1.webp','assets/illustrations/row-female-2.webp','assets/illustrations/row-female-3.webp'],
+    superman:['assets/illustrations/superman-male-1.webp','assets/illustrations/superman-male-2.webp','assets/illustrations/superman-male-3.webp'],
+    sideleg:['assets/illustrations/sideleg-female-1.webp','assets/illustrations/sideleg-female-2.webp','assets/illustrations/sideleg-female-3.webp'],
+    seatedtwist:['assets/illustrations/seatedtwist-male-1.webp','assets/illustrations/seatedtwist-male-2.webp','assets/illustrations/seatedtwist-male-3.webp'],
+    jumpingjack:['assets/illustrations/jumpingjack-female-1.webp','assets/illustrations/jumpingjack-female-2.webp','assets/illustrations/jumpingjack-female-3.webp'],
+    'yoga-catcow':['assets/illustrations/yoga-catcow-female-1.webp','assets/illustrations/yoga-catcow-female-2.webp','assets/illustrations/yoga-catcow-female-3.webp'],
+    'yoga-child':['assets/illustrations/yoga-child-male-1.webp','assets/illustrations/yoga-child-male-2.webp','assets/illustrations/yoga-child-male-3.webp'],
+    'yoga-dog':['assets/illustrations/yoga-dog-female-1.webp','assets/illustrations/yoga-dog-female-2.webp','assets/illustrations/yoga-dog-female-3.webp'],
+    'yoga-warrior2':['assets/illustrations/yoga-warrior2-male-1.webp','assets/illustrations/yoga-warrior2-male-2.webp','assets/illustrations/yoga-warrior2-male-3.webp']
+  };
+  globalThis.flexVariationIllustrations={
+    squat:['assets/illustrations/squat-variation-1.webp','assets/illustrations/squat-variation-2.webp','assets/illustrations/squat-variation-3.webp'],
+    pushup:['assets/illustrations/pushup-variation-1.webp','assets/illustrations/pushup-variation-2.webp','assets/illustrations/pushup-variation-3.webp']
   };
 })();

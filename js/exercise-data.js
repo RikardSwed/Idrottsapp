@@ -255,7 +255,15 @@
     'meditation-breath-count':['assets/illustrations/v0.24.0/meditation-breath-count-female-1.webp','assets/illustrations/v0.24.0/meditation-breath-count-female-2.webp','assets/illustrations/v0.24.0/meditation-breath-count-female-3.webp'],
     'meditation-senses':['assets/illustrations/v0.24.0/meditation-senses-male-1.webp','assets/illustrations/v0.24.0/meditation-senses-male-2.webp','assets/illustrations/v0.24.0/meditation-senses-male-3.webp'],
     'meditation-open':['assets/illustrations/v0.24.0/meditation-open-female-1.webp','assets/illustrations/v0.24.0/meditation-open-female-2.webp','assets/illustrations/v0.24.0/meditation-open-female-3.webp'],
-    'meditation-walking':['assets/illustrations/v0.24.0/meditation-walking-male-1.webp','assets/illustrations/v0.24.0/meditation-walking-male-2.webp','assets/illustrations/v0.24.0/meditation-walking-male-3.webp']
+    'meditation-walking':['assets/illustrations/v0.24.0/meditation-walking-male-1.webp','assets/illustrations/v0.24.0/meditation-walking-male-2.webp','assets/illustrations/v0.24.0/meditation-walking-male-3.webp'],
+    'roller-thoracic':['assets/illustrations/v0.25.0/roller-thoracic-female-1.webp','assets/illustrations/v0.25.0/roller-thoracic-female-2.webp','assets/illustrations/v0.25.0/roller-thoracic-female-3.webp'],
+    'roller-calf':['assets/illustrations/v0.25.0/roller-calf-male-1.webp','assets/illustrations/v0.25.0/roller-calf-male-2.webp','assets/illustrations/v0.25.0/roller-calf-male-3.webp'],
+    'roller-glute':['assets/illustrations/v0.25.0/roller-glute-female-1.webp','assets/illustrations/v0.25.0/roller-glute-female-2.webp','assets/illustrations/v0.25.0/roller-glute-female-3.webp'],
+    'roller-balance':['assets/illustrations/v0.25.0/roller-balance-male-1.webp','assets/illustrations/v0.25.0/roller-balance-male-2.webp','assets/illustrations/v0.25.0/roller-balance-male-3.webp'],
+    'hands-fist':['assets/illustrations/v0.25.0/hands-fist-female-1.webp','assets/illustrations/v0.25.0/hands-fist-female-2.webp','assets/illustrations/v0.25.0/hands-fist-female-3.webp'],
+    'hands-thumb':['assets/illustrations/v0.25.0/hands-thumb-male-1.webp','assets/illustrations/v0.25.0/hands-thumb-male-2.webp','assets/illustrations/v0.25.0/hands-thumb-male-3.webp'],
+    'hands-wrist':['assets/illustrations/v0.25.0/hands-wrist-female-1.webp','assets/illustrations/v0.25.0/hands-wrist-female-2.webp','assets/illustrations/v0.25.0/hands-wrist-female-3.webp'],
+    'hands-towel':['assets/illustrations/v0.25.0/hands-towel-male-1.webp','assets/illustrations/v0.25.0/hands-towel-male-2.webp','assets/illustrations/v0.25.0/hands-towel-male-3.webp']
   };
   globalThis.flexVariationIllustrations={
     squat:['assets/illustrations/squat-variation-1.webp','assets/illustrations/squat-variation-2.webp','assets/illustrations/squat-variation-3.webp'],

@@ -263,7 +263,15 @@
     'hands-fist':['assets/illustrations/v0.25.0/hands-fist-female-1.webp','assets/illustrations/v0.25.0/hands-fist-female-2.webp','assets/illustrations/v0.25.0/hands-fist-female-3.webp'],
     'hands-thumb':['assets/illustrations/v0.25.0/hands-thumb-male-1.webp','assets/illustrations/v0.25.0/hands-thumb-male-2.webp','assets/illustrations/v0.25.0/hands-thumb-male-3.webp'],
     'hands-wrist':['assets/illustrations/v0.25.0/hands-wrist-female-1.webp','assets/illustrations/v0.25.0/hands-wrist-female-2.webp','assets/illustrations/v0.25.0/hands-wrist-female-3.webp'],
-    'hands-towel':['assets/illustrations/v0.25.0/hands-towel-male-1.webp','assets/illustrations/v0.25.0/hands-towel-male-2.webp','assets/illustrations/v0.25.0/hands-towel-male-3.webp']
+    'hands-towel':['assets/illustrations/v0.25.0/hands-towel-male-1.webp','assets/illustrations/v0.25.0/hands-towel-male-2.webp','assets/illustrations/v0.25.0/hands-towel-male-3.webp'],
+    'feet-toeyoga':['assets/illustrations/v0.26.0/feet-toeyoga-female-1.webp','assets/illustrations/v0.26.0/feet-toeyoga-female-2.webp','assets/illustrations/v0.26.0/feet-toeyoga-female-3.webp'],
+    'feet-arch':['assets/illustrations/v0.26.0/feet-arch-male-1.webp','assets/illustrations/v0.26.0/feet-arch-male-2.webp','assets/illustrations/v0.26.0/feet-arch-male-3.webp'],
+    'feet-ankle':['assets/illustrations/v0.26.0/feet-ankle-female-1.webp','assets/illustrations/v0.26.0/feet-ankle-female-2.webp','assets/illustrations/v0.26.0/feet-ankle-female-3.webp'],
+    'feet-towel':['assets/illustrations/v0.26.0/feet-towel-male-1.webp','assets/illustrations/v0.26.0/feet-towel-male-2.webp','assets/illustrations/v0.26.0/feet-towel-male-3.webp'],
+    'feet-heeltoe':['assets/illustrations/v0.26.0/feet-heeltoe-female-1.webp','assets/illustrations/v0.26.0/feet-heeltoe-female-2.webp','assets/illustrations/v0.26.0/feet-heeltoe-female-3.webp'],
+    'feet-toe-spread':['assets/illustrations/v0.26.0/feet-toe-spread-male-1.webp','assets/illustrations/v0.26.0/feet-toe-spread-male-2.webp','assets/illustrations/v0.26.0/feet-toe-spread-male-3.webp'],
+    'feet-single-balance':['assets/illustrations/v0.26.0/feet-single-balance-female-1.webp','assets/illustrations/v0.26.0/feet-single-balance-female-2.webp','assets/illustrations/v0.26.0/feet-single-balance-female-3.webp'],
+    'mobility-ankle-rock':['assets/illustrations/v0.26.0/mobility-ankle-rock-male-1.webp','assets/illustrations/v0.26.0/mobility-ankle-rock-male-2.webp','assets/illustrations/v0.26.0/mobility-ankle-rock-male-3.webp']
   };
   globalThis.flexVariationIllustrations={
     squat:['assets/illustrations/squat-variation-1.webp','assets/illustrations/squat-variation-2.webp','assets/illustrations/squat-variation-3.webp'],

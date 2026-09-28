@@ -271,7 +271,23 @@
     'feet-heeltoe':['assets/illustrations/v0.26.0/feet-heeltoe-female-1.webp','assets/illustrations/v0.26.0/feet-heeltoe-female-2.webp','assets/illustrations/v0.26.0/feet-heeltoe-female-3.webp'],
     'feet-toe-spread':['assets/illustrations/v0.26.0/feet-toe-spread-male-1.webp','assets/illustrations/v0.26.0/feet-toe-spread-male-2.webp','assets/illustrations/v0.26.0/feet-toe-spread-male-3.webp'],
     'feet-single-balance':['assets/illustrations/v0.26.0/feet-single-balance-female-1.webp','assets/illustrations/v0.26.0/feet-single-balance-female-2.webp','assets/illustrations/v0.26.0/feet-single-balance-female-3.webp'],
-    'mobility-ankle-rock':['assets/illustrations/v0.26.0/mobility-ankle-rock-male-1.webp','assets/illustrations/v0.26.0/mobility-ankle-rock-male-2.webp','assets/illustrations/v0.26.0/mobility-ankle-rock-male-3.webp']
+    'mobility-ankle-rock':['assets/illustrations/v0.26.0/mobility-ankle-rock-male-1.webp','assets/illustrations/v0.26.0/mobility-ankle-rock-male-2.webp','assets/illustrations/v0.26.0/mobility-ankle-rock-male-3.webp'],
+    'stretch-hamstring':['assets/illustrations/v0.27.0/stretch-hamstring-female-1.webp','assets/illustrations/v0.27.0/stretch-hamstring-female-2.webp','assets/illustrations/v0.27.0/stretch-hamstring-female-3.webp'],
+    'stretch-hipflexor':['assets/illustrations/v0.27.0/stretch-hipflexor-male-1.webp','assets/illustrations/v0.27.0/stretch-hipflexor-male-2.webp','assets/illustrations/v0.27.0/stretch-hipflexor-male-3.webp'],
+    'stretch-chest':['assets/illustrations/v0.27.0/stretch-chest-female-1.webp','assets/illustrations/v0.27.0/stretch-chest-female-2.webp','assets/illustrations/v0.27.0/stretch-chest-female-3.webp'],
+    'stretch-calf':['assets/illustrations/v0.27.0/stretch-calf-male-1.webp','assets/illustrations/v0.27.0/stretch-calf-male-2.webp','assets/illustrations/v0.27.0/stretch-calf-male-3.webp'],
+    'mobility-open-book':['assets/illustrations/v0.27.0/mobility-open-book-female-1.webp','assets/illustrations/v0.27.0/mobility-open-book-female-2.webp','assets/illustrations/v0.27.0/mobility-open-book-female-3.webp'],
+    'mobility-thread-needle':['assets/illustrations/v0.27.0/mobility-thread-needle-male-1.webp','assets/illustrations/v0.27.0/mobility-thread-needle-male-2.webp','assets/illustrations/v0.27.0/mobility-thread-needle-male-3.webp'],
+    'stretch-lat-wall':['assets/illustrations/v0.27.0/stretch-lat-wall-female-1.webp','assets/illustrations/v0.27.0/stretch-lat-wall-female-2.webp','assets/illustrations/v0.27.0/stretch-lat-wall-female-3.webp'],
+    'stretch-glute-chair':['assets/illustrations/v0.27.0/stretch-glute-chair-male-1.webp','assets/illustrations/v0.27.0/stretch-glute-chair-male-2.webp','assets/illustrations/v0.27.0/stretch-glute-chair-male-3.webp'],
+    'core-heel-slide':['assets/illustrations/v0.28.0/core-heel-slide-female-1.webp','assets/illustrations/v0.28.0/core-heel-slide-female-2.webp','assets/illustrations/v0.28.0/core-heel-slide-female-3.webp'],
+    'core-march':['assets/illustrations/v0.28.0/core-march-male-1.webp','assets/illustrations/v0.28.0/core-march-male-2.webp','assets/illustrations/v0.28.0/core-march-male-3.webp'],
+    'core-knee-fallout':['assets/illustrations/v0.28.0/core-knee-fallout-female-1.webp','assets/illustrations/v0.28.0/core-knee-fallout-female-2.webp','assets/illustrations/v0.28.0/core-knee-fallout-female-3.webp'],
+    'core-bear-hover':['assets/illustrations/v0.28.0/core-bear-hover-male-1.webp','assets/illustrations/v0.28.0/core-bear-hover-male-2.webp','assets/illustrations/v0.28.0/core-bear-hover-male-3.webp'],
+    'back-prone-w':['assets/illustrations/v0.28.0/back-prone-w-female-1.webp','assets/illustrations/v0.28.0/back-prone-w-female-2.webp','assets/illustrations/v0.28.0/back-prone-w-female-3.webp'],
+    'back-wall-row':['assets/illustrations/v0.28.0/back-wall-row-male-1.webp','assets/illustrations/v0.28.0/back-wall-row-male-2.webp','assets/illustrations/v0.28.0/back-wall-row-male-3.webp'],
+    'glute-sit-stand':['assets/illustrations/v0.28.0/glute-sit-stand-female-1.webp','assets/illustrations/v0.28.0/glute-sit-stand-female-2.webp','assets/illustrations/v0.28.0/glute-sit-stand-female-3.webp'],
+    'glute-kickback':['assets/illustrations/v0.28.0/glute-kickback-male-1.webp','assets/illustrations/v0.28.0/glute-kickback-male-2.webp','assets/illustrations/v0.28.0/glute-kickback-male-3.webp']
   };
   globalThis.flexVariationIllustrations={
     squat:['assets/illustrations/squat-variation-1.webp','assets/illustrations/squat-variation-2.webp','assets/illustrations/squat-variation-3.webp'],

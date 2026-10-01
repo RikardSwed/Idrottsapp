@@ -212,7 +212,7 @@
     'pilates-rollup':['assets/illustrations/upload-0.19.0-to-0.21.0/pilates-rollup-male-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/pilates-rollup-male-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/pilates-rollup-male-3.webp'],
     'pilates-singleleg':['assets/illustrations/upload-0.19.0-to-0.21.0/pilates-singleleg-female-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/pilates-singleleg-female-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/pilates-singleleg-female-3.webp'],
     'pilates-clam':['assets/illustrations/upload-0.19.0-to-0.21.0/pilates-clam-male-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/pilates-clam-male-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/pilates-clam-male-3.webp'],
-    'qigong-lift':['assets/illustrations/upload-0.19.0-to-0.21.0/qigong-lift-female-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-lift-female-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-lift-female-3.webp'],
+    'qigong-lifeg':['assets/illustrations/upload-0.19.0-to-0.21.0/qigong-lift-female-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-lift-female-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-lift-female-3.webp'],
     'qigong-cloud':['assets/illustrations/upload-0.19.0-to-0.21.0/qigong-cloud-male-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-cloud-male-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-cloud-male-3.webp'],
     'qigong-bow':['assets/illustrations/upload-0.19.0-to-0.21.0/qigong-bow-female-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-bow-female-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-bow-female-3.webp'],
     'qigong-wave':['assets/illustrations/upload-0.19.0-to-0.21.0/qigong-wave-male-1.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-wave-male-2.webp','assets/illustrations/upload-0.19.0-to-0.21.0/qigong-wave-male-3.webp'],
@@ -289,6 +289,13 @@
     'glute-sit-stand':['assets/illustrations/v0.28.0/glute-sit-stand-female-1.webp','assets/illustrations/v0.28.0/glute-sit-stand-female-2.webp','assets/illustrations/v0.28.0/glute-sit-stand-female-3.webp'],
     'glute-kickback':['assets/illustrations/v0.28.0/glute-kickback-male-1.webp','assets/illustrations/v0.28.0/glute-kickback-male-2.webp','assets/illustrations/v0.28.0/glute-kickback-male-3.webp']
   };
+  // v0.29.0: separate, reviewed steps for legs and shoulders.
+  Object.assign(globalThis.flexIllustrations, {
+    'legs-stepup':["assets/illustrations/v0.29.0/legs-stepup-female-1.webp", "assets/illustrations/v0.29.0/legs-stepup-female-2.webp", "assets/illustrations/v0.29.0/legs-stepup-female-3.webp"],
+    'legs-side-step':["assets/illustrations/v0.29.0/legs-side-step-male-1.webp", "assets/illustrations/v0.29.0/legs-side-step-male-2.webp", "assets/illustrations/v0.29.0/legs-side-step-male-3.webp"],
+    'shoulder-external':["assets/illustrations/v0.29.0/shoulder-external-female-1.webp", "assets/illustrations/v0.29.0/shoulder-external-female-2.webp", "assets/illustrations/v0.29.0/shoulder-external-female-3.webp"],
+    'shoulder-scaption':["assets/illustrations/v0.29.0/shoulder-scaption-male-1.webp", "assets/illustrations/v0.29.0/shoulder-scaption-male-2.webp", "assets/illustrations/v0.29.0/shoulder-scaption-male-3.webp"],
+  });
   globalThis.flexVariationIllustrations={
     squat:['assets/illustrations/squat-variation-1.webp','assets/illustrations/squat-variation-2.webp','assets/illustrations/squat-variation-3.webp'],
     pushup:['assets/illustrations/pushup-variation-1.webp','assets/illustrations/pushup-variation-2.webp','assets/illustrations/pushup-variation-3.webp']

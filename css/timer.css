@@ -57,3 +57,36 @@
 .timer-resume{position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom));z-index:45;border:1px solid var(--mint);border-radius:99px;background:var(--green);color:#fff;padding:14px 20px;box-shadow:var(--shadow);font-weight:800;cursor:pointer}
 .timer-resume[hidden]{display:none}
 @media(max-width:600px){.timer-dialog{width:100%;max-width:100%;height:100dvh;max-height:100dvh;margin:0;border-radius:0;padding:calc(18px + env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left))}.timer-header h2{font-size:20px}.timer-presets{grid-template-columns:repeat(2,minmax(0,1fr))}.timer-exercise img{width:76px;height:76px}.timer-exercise h3{font-size:17px}.timer-controls button{padding:13px 9px}.timer-rep-counter{align-items:flex-start}.timer-rep-counter>span{max-width:45%}.timer-preview li{flex-wrap:wrap;gap:3px}}
+
+/* v0.29.1 — image-first workout, with controls tucked away. */
+.timer-dialog{width:min(580px,calc(100% - 32px));padding:22px;background:#faf7f0}
+.timer-header{align-items:center;margin-bottom:14px}
+.timer-header h2{font-size:13px;font-weight:600;color:var(--muted);max-width:380px}
+.timer-header .eyebrow{font-size:9px;margin-bottom:4px}
+.timer-dialog .timer-close{width:40px;min-height:40px;background:rgba(255,255,255,.65);border:0}
+.timer-focus{text-align:center}
+.timer-focus-label{font-size:10px;font-weight:800;letter-spacing:.15em;color:#477063;margin:8px 0 12px}
+.timer-art{height:clamp(180px,34dvh,340px);width:100%;border-radius:24px;overflow:hidden;background:#f3ede4;touch-action:pan-y;user-select:none}
+.timer-art img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;pointer-events:none}
+.timer-art-empty{height:100%;display:grid;place-items:center;padding:25px;font:800 26px Manrope,sans-serif;color:#477063;background:linear-gradient(145deg,#e2eee7,#f3ede4)}
+.timer-focus-name{font:800 clamp(19px,4.8vw,26px)/1.2 Manrope,sans-serif;letter-spacing:-.035em;margin:17px 0 4px}
+.timer-focus .timer-clock{font-size:clamp(72px,20vw,100px);line-height:1.05;margin:8px 0 3px;letter-spacing:-.065em}
+.timer-focus .timer-clock-label{margin:0 0 18px;font-size:12px}
+.timer-focus .timer-primary{height:60px;border-radius:18px;font-size:19px;box-shadow:0 8px 20px #173f3515}
+.timer-navigation{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:10px}
+.timer-navigation button,.timer-tools button,.timer-done{border:0;background:transparent;color:var(--green);padding:8px;font-size:12px!important}
+.timer-navigation span{font-size:9px;color:var(--muted)}
+.timer-tools{display:flex;justify-content:center}
+.timer-done{width:100%;font-size:14px!important;min-height:38px!important;padding:8px 0!important}
+.timer-more{margin:3px 0 0;text-align:left}
+.timer-more>summary{text-align:center;list-style:none;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);padding:12px;min-height:44px}
+.timer-more>summary::-webkit-details-marker{display:none}
+.timer-more>summary:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.timer-more-content{padding:15px;border:1px solid var(--line);border-radius:16px;background:#fffdf8}
+.timer-more .timer-rep-counter{margin:0}
+.timer-more .timer-small-actions{justify-content:space-between}
+.timer-focus #timerMessage:empty{display:none}
+.is-rest .timer-focus-label{color:#97501f}
+.is-rest .timer-art{background:#f3e9db}
+@media(max-width:600px){.timer-dialog{width:100%;padding:calc(12px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}.timer-header{margin-bottom:8px}.timer-header h2{font-size:11px}.timer-art{height:clamp(160px,32dvh,310px)}.timer-focus-name{margin-top:12px}.timer-focus .timer-clock{font-size:82px}.timer-focus .timer-primary{height:56px}.timer-focus .timer-clock-label{margin-bottom:13px}.timer-focus-label{margin:5px 0 9px}.timer-navigation{margin-top:4px}.timer-navigation button{font-size:11px!important}}
+@media(max-height:700px){.timer-art{height:24dvh;min-height:130px}.timer-focus .timer-clock{font-size:68px}.timer-focus-name{font-size:18px}.timer-header .eyebrow{display:none}.timer-focus .timer-primary{height:50px;min-height:50px}.timer-focus-label{margin:4px 0 8px}}

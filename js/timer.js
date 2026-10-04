@@ -11,7 +11,7 @@
   let options = Core.settings(read(localStorage, 'flex-timer-settings') || {});
   let context = null, session = null, stage = 'setup', lastPhase = '', lastSecond = -1;
   let audio = null, wakeLock = null, wakePending = false, opener = null, finishAsked = false;
-  let message = '', lastSave = 0;
+  let message = '', lastSave = 0, readyIndex = 0;
   const dialog = document.createElement('dialog');
   dialog.id = 'timerDialog'; dialog.className = 'timer-dialog'; dialog.setAttribute('aria-labelledby', 'timerTitle');
   document.body.append(dialog);
@@ -46,7 +46,7 @@
   }
   function choose(source) {
     if (session && session.status !== 'done') { renderRun(); open(); return; }
-    context = source; session = null; stage = 'setup'; message = ''; renderSetup(); open();
+    context = source; session = null; stage = 'ready'; readyIndex = 0; message = ''; renderReady(); open();
   }
   function sourceFromKey(key) {
     if (key.startsWith('exercise:')) {
@@ -59,6 +59,26 @@
     return p ? {title: p.name, single: false, items: p.exercises.filter(x => data.some(e => e.id === x.id)).map(x => ({...x}))} : null;
   }
   function launch(key) { const source = sourceFromKey(key); if (source) choose(source); }
+  function artwork(id) {
+    const exercise = data.find(e => e.id === id);
+    return '<div class="timer-art" data-timer-swipe>' + (exercise?.image ? '<img draggable="false" src="' + esc(exercise.image) + '" alt="' + esc(name(id)) + '">' : '<div class="timer-art-empty">' + esc(name(id)) + '</div>') + '</div>';
+  }
+  function arrows() {
+    return '<div class="timer-navigation">' + button('previous','‹ ' + t('Föregående','Previous')) + '<span>' + t('Svep bilden','Swipe the image') + '</span>' + button('next',t('Nästa','Next') + ' ›') + '</div>';
+  }
+  function renderReady() {
+    stage = 'ready';
+    const item = context.items[readyIndex];
+    if (!item) return;
+    const work = Core.buildPlan([item],options).find(p => p.kind === 'work');
+    shell('<div class="timer-focus"><p class="timer-focus-label">' + t('REDO NÄR DU ÄR','READY WHEN YOU ARE') + '</p>' + artwork(item.id) +
+      '<h3 class="timer-focus-name">' + esc(name(item.id)) + '</h3><div class="timer-clock">' + clock((work?.duration || 0)*1000) + '</div><p class="timer-clock-label">' + (work?.reps ? work.reps + ' reps' : t('Tid per set','Time per set')) + '</p>' +
+      button('start',t('▶ Starta','▶ Start'),'timer-primary') + arrows() +
+      '<div class="timer-tools">' + button('settings','⚙ ' + t('Inställningar','Settings')) + '</div></div>');
+    q('[data-timer-action="previous"]').disabled = readyIndex === 0;
+    q('[data-timer-action="next"]').disabled = readyIndex >= context.items.length-1;
+    dialog.scrollTop = 0;
+  }
   function renderSetup() {
     stage = 'setup'; finishAsked = false;
     const single = context.single, first = context.items[0];
@@ -77,7 +97,7 @@
       button('test',t('Prova ljud och röst','Test sound and voice'),'timer-secondary') +
       '<p class="timer-hint">' + t('Timern pausas när du lämnar appen eller låser skärmen. Repetitioner räknas manuellt; anpassa intensiteten efter övningen.','The timer pauses when you leave the app or lock the screen. Repetitions are counted manually; match the intensity to the exercise.') + '</p>' +
       '<section class="timer-preview"><h3>' + t('Ditt upplägg','Your plan') + '</h3><p id="timerEstimate"></p><ol>' + context.items.map(x => '<li><span>' + esc(name(x.id)) + '</span><b>' + esc((x.sets || 1) + ' × ' + x.amount + ' ' + (x.unit === 'sek' ? 's' : x.unit)) + '</b></li>').join('') + '</ol></section>' +
-      '<button class="timer-primary" type="submit">' + t('Starta passet','Start workout') + ' →</button></form>');
+      '<button class="timer-primary" type="submit">' + t('Klart','Done') + '</button></form>');
     updateSetup();
   }
   function readForm() {
@@ -122,10 +142,10 @@
   function releaseScreen() { const lock = wakeLock; wakeLock = null; if (lock) lock.release().catch(() => {}); paintWake(); }
   function paintWake() { const el = q('#timerWake'); if (el) el.textContent = wakeLock ? t('Skärmen hålls vaken','Screen stays awake') : t('Håll appen öppen. Skärmlås pausar passet.','Keep the app open. Screen lock pauses the workout.'); }
   function start() {
-    const form = q('#timerSetup'); if (!form.reportValidity()) return;
+    const form = q('#timerSetup'); if (form && !form.reportValidity()) return;
     readForm(); const plan = Core.buildPlan(context.items,options); if (!plan.length) return;
     write(localStorage,'flex-timer-settings',options);
-    session = new Core.Session(plan,options.mode); session.start(); stage = 'run'; lastPhase = ''; lastSecond = -1; message = ''; finishAsked = false;
+    session = new Core.Session(plan,options.mode); if (readyIndex > 0) session.index = plan.findIndex(p => p.kind === 'work' && p.id === context.items[readyIndex].id); session.start(); stage = 'run'; lastPhase = ''; lastSecond = -1; message = ''; finishAsked = false;
     unlockAudio(); holdScreen(); renderRun(); announce(); save();
   }
   function phaseLabel() { return session.emomRest || session.phase?.kind === 'rest' ? t('VILA','REST') : session.phase?.kind === 'prepare' ? t('GÖR DIG REDO','GET READY') : t('DIN TUR','YOUR TURN'); }
@@ -134,34 +154,29 @@
     if (!session) return;
     if (session.status === 'done') { renderSummary(); return; }
     stage = 'run';
-    const p = session.phase, exercise = data.find(e => e.id === p.id), rest = p.kind === 'rest' || session.emomRest;
-    const next = p.kind === 'work' ? nextWork() : session.plan.slice(session.index).find(x => x.kind === 'work');
-    const activeWork = p.kind === 'work' && !session.emomRest;
-    const completed = session.results.filter(x => x.outcome !== 'skipped').length;
-    const totalWork = session.plan.filter(x => x.kind === 'work').length;
-    shell('<div class="timer-running ' + (rest ? 'is-rest' : '') + '"><div class="timer-phase-line"><span id="timerPhase" role="status">' + phaseLabel() + '</span><span>' + completed + ' / ' + totalWork + '</span></div>' +
-      '<div class="timer-clock" id="timerClock" role="timer" aria-live="off"></div><p class="timer-clock-label">' + (p.duration == null ? t('Tid i detta set','Time in this set') : t('Kvar i momentet','Remaining in phase')) + '</p>' +
-      '<progress id="timerProgress" max="' + session.plan.length + '" value="' + session.index + '" aria-label="' + t('Passets framsteg','Workout progress') + '"></progress>' +
-      '<div class="timer-exercise">' + (exercise?.image ? '<img src="' + esc(exercise.image) + '" alt="' + esc(name(exercise.id)) + '">' : '') + '<div><p class="eyebrow">' + (p.kind === 'work' ? t('AKTUELL ÖVNING','CURRENT EXERCISE') : t('FÖRBERED NÄSTA','PREPARE NEXT')) + '</p><h3>' + esc(name(p.id)) + '</h3><p>' + (p.set ? t('Set','Set') + ' ' + p.set + ' / ' + p.sets : '') + (p.reps ? ' · ' + t('Mål','Target') + ': ' + p.reps + ' reps' : '') + '</p></div></div>' +
-      (activeWork ? '<div class="timer-rep-counter"><span>' + t('Manuellt räknade reps','Manually counted reps') + '</span><div>' + button('minus','−') + '<output id="timerReps" aria-live="polite">' + session.reps + '</output>' + button('plus','+ 1') + '</div></div>' : '') +
-      '<p class="timer-next">' + (next ? t('Nästa','Next') + ': ' + esc(name(next.id)) + (next.set ? ' · ' + t('set','set') + ' ' + next.set : '') : t('Sista momentet','Final phase')) + '</p>' +
+    const p = session.phase, rest = p.kind === 'rest' || session.emomRest, active = p.kind === 'work' && !session.emomRest;
+    const preview = session.emomRest ? nextWork() : p.kind !== 'work' ? session.plan.slice(session.index).find(x => x.kind === 'work') : p;
+    const shown = preview || p;
+    shell('<div class="timer-focus timer-running ' + (rest ? 'is-rest' : '') + '"><p class="timer-focus-label" id="timerPhase" role="status"></p>' +
+      artwork(shown.id) + '<h3 class="timer-focus-name">' + esc(name(shown.id)) + '</h3>' +
+      '<div class="timer-clock" id="timerClock" role="timer" aria-live="off"></div><p class="timer-clock-label">' + (rest ? t('Vila kvar','Rest remaining') : p.kind === 'prepare' ? t('Startar om','Starting in') : (p.reps ? p.reps + ' reps · ' : '') + t('Set','Set') + ' ' + p.set + ' / ' + p.sets) + '</p>' +
+      button('pause',t('Pausa','Pause'),'timer-primary') +
+      (active ? button('done',t('✓ Set klart','✓ Set done'),'timer-done') : '') + arrows() +
+      '<details class="timer-more"><summary>••• ' + t('Mer','More') + '</summary><div class="timer-more-content">' +
+      (active ? '<div class="timer-rep-counter"><span>' + t('Räkna reps','Count reps') + '</span><div>' + button('minus','−') + '<output id="timerReps">' + session.reps + '</output>' + button('plus','+ 1') + '</div></div>' : '') +
+      '<div class="timer-checks">' + check('sound',t('Ljudsignaler','Sound cues')) + check('voice',t('Röst','Voice')) + check('awake',t('Håll skärmen vaken','Keep screen awake')) + '</div><div class="timer-small-actions">' + (p.kind === 'rest' ? button('rest',t('+15 s vila','+15 s rest')) : '') + button('skip',t('Hoppa över moment','Skip phase')) + button('finish',t('Avsluta pass','End workout')) + '</div><p id="timerWake" class="timer-hint"></p></div></details>' +
       '<p id="timerMessage" class="timer-hint" role="status">' + esc(message) + '</p>' +
-      '<div class="timer-controls">' + button('pause', session.status === 'paused' ? t('Fortsätt','Resume') : t('Pausa','Pause'),'timer-primary') +
-      (activeWork ? button('done',t('Set klart','Set done'),'timer-secondary') : button('skip',t('Börja nästa','Start next'),'timer-secondary')) + '</div>' +
-      '<div class="timer-small-actions">' + (p.kind === 'rest' ? button('rest',t('+15 s vila','+15 s rest')) : '') + (activeWork ? button('skip',t('Hoppa över','Skip phase')) : '') + button('finish',t('Avsluta pass','End workout')) + '</div>' +
-      '<p id="timerWake" class="timer-hint"></p>' +
       '<div id="timerEndConfirm" class="timer-end-confirm" hidden><p>' + t('Avsluta passet här?','End the workout here?') + '</p>' + button('end-now',t('Ja, avsluta','Yes, end')) + button('cancel-end',t('Fortsätt passet','Keep workout')) + '</div></div>');
     dialog.scrollTop = 0; paint(); paintWake();
-    if (session.status === 'paused') q('[data-timer-action="pause"]').focus();
+    q('[data-timer-action="previous"]').disabled = !session.previousExerciseIndex();
   }
   function paint() {
     if (stage !== 'run' || !session.phase) return;
-    const paused = session.status === 'paused';
+    const paused = session.status === 'paused', rest = session.emomRest || session.phase.kind === 'rest';
     q('#timerClock').textContent = clock(session.remaining ?? session.elapsed);
-    q('#timerPhase').textContent = paused ? t('PAUSAD','PAUSED') : phaseLabel();
-    q('#timerProgress').value = session.index;
+    q('#timerPhase').textContent = paused ? t('PAUSAD','PAUSED') : rest ? (nextWork() ? t('NÄSTA ÖVNING','NEXT EXERCISE') : t('SISTA VILAN','FINAL REST')) : session.phase.kind === 'prepare' ? t('GÖR DIG REDO','GET READY') : t('DAGS NU','YOUR TURN');
     if (q('#timerReps')) q('#timerReps').textContent = session.reps;
-    q('[data-timer-action="pause"]').textContent = paused ? t('Fortsätt','Resume') : t('Pausa','Pause');
+    q('[data-timer-action="pause"]').textContent = paused ? t('▶ Fortsätt','▶ Resume') : t('Ⅱ Pausa','Ⅱ Pause');
     ['done','skip','plus','minus'].forEach(a => { const el = q('[data-timer-action="' + a + '"]'); if (el) el.disabled = paused; });
     if (q('[data-timer-action="minus"]')) q('[data-timer-action="minus"]').setAttribute('aria-label',t('Ta bort en repetition','Remove one repetition'));
   }
@@ -201,8 +216,8 @@
     const done = session.results.filter(r => ['confirmed','elapsed'].includes(r.outcome)), skipped = session.results.filter(r => r.outcome === 'skipped').length;
     shell('<div class="timer-summary"><span class="timer-summary-mark">✓</span><h3>' + t('Passet är avslutat','Workout ended') + '</h3><p>' + clock(session.total) + ' · ' + done.length + ' ' + t('avslutade arbetsmoment','finished work phases') + '</p><p>' + skipped + ' ' + t('överhoppade moment','skipped phases') + '</p><p>' + session.results.reduce((n,r) => n + r.reps,0) + ' ' + t('manuellt räknade repetitioner','manually counted repetitions') + '</p><p class="timer-hint">' + t('Avslutad tid betyder inte att repetitionsmålet är uppnått. Spara dina faktiska resultat i Min träning.','Elapsed time does not mean the rep target was reached. Save your actual results in My training.') + '</p>' + button('again',t('Nytt pass med samma upplägg','New workout with this plan'),'timer-primary') + button('training',t('Öppna Min träning','Open My training'),'timer-secondary') + '</div>');
   }
-  dialog.addEventListener('submit', event => { event.preventDefault(); if (event.target.id === 'timerSetup') start(); });
-  dialog.addEventListener('change', () => { if (stage === 'setup') updateSetup(); });
+  dialog.addEventListener('submit', event => { event.preventDefault(); if (event.target.id === 'timerSetup') { readForm(); write(localStorage,'flex-timer-settings',options); renderReady(); } });
+  dialog.addEventListener('change', event => { if (stage === 'setup') updateSetup(); else if (stage === 'run' && ['sound','voice','awake'].includes(event.target.name)) { options[event.target.name] = event.target.checked; if (!options.voice) window.speechSynthesis?.cancel(); if (options.awake) holdScreen(); else releaseScreen(); unlockAudio(); write(localStorage,'flex-timer-settings',options); save(); } });
   dialog.addEventListener('input', event => { if (stage === 'setup' && event.target.type === 'number') updateSetup(); });
   dialog.addEventListener('cancel', event => { event.preventDefault(); hide(); });
   dialog.addEventListener('keydown', event => { if (event.key === 'Escape') event.stopPropagation(); });
@@ -210,6 +225,9 @@
     const action = event.target.closest('[data-timer-action]')?.dataset.timerAction;
     if (!action) return;
     if (action === 'close') { hide(); return; }
+    if (action === 'settings') { renderSetup(); return; }
+    if (action === 'start') { start(); return; }
+    if (action === 'next' || action === 'previous') { navigateExercise(action === 'next' ? 1 : -1); return; }
     if (['guided','tabata','hiit','emom'].includes(action)) {
       readForm(); options.mode = action === 'guided' ? 'guided' : action === 'emom' ? 'emom' : 'interval';
       if (action === 'tabata') Object.assign(options,{work:20,rest:10,rounds:8});
@@ -217,7 +235,7 @@
       renderSetup(); return;
     }
     if (action === 'test') { readForm(); unlockAudio(); setTimeout(() => sound(),100); speak('Gör dig redo. Nästa övning.','Get ready. Next exercise.'); return; }
-    if (action === 'again') { session = null; renderSetup(); return; }
+    if (action === 'again') { session = null; readyIndex = 0; renderReady(); return; }
     if (action === 'training') { hide(); session = null; updateResume(); closeModal(); goTo('training'); return; }
     if (!session) return;
     if (action === 'pause') {
@@ -232,6 +250,25 @@
     if (action === 'end-now' && finishAsked) { session.stop(); renderSummary(); }
     save();
   });
+  function navigateExercise(direction) {
+    if (stage === 'ready') {
+      readyIndex = Math.max(0,Math.min(context.items.length-1,readyIndex+direction)); renderReady(); return;
+    }
+    if (stage !== 'run' || finishAsked) return;
+    session.navigateExercise(direction); message = ''; lastPhase = ''; renderRun(); announce(); save();
+  }
+  let touchStart = null;
+  dialog.addEventListener('pointerdown',event => {
+    if (!event.target.closest('[data-timer-swipe]') || !event.isPrimary) return;
+    touchStart = {x:event.clientX,y:event.clientY,id:event.pointerId};
+    event.target.closest('[data-timer-swipe]').setPointerCapture(event.pointerId);
+  });
+  dialog.addEventListener('pointerup',event => {
+    if (!touchStart || touchStart.id !== event.pointerId) return;
+    const dx = event.clientX-touchStart.x, dy = event.clientY-touchStart.y; touchStart = null;
+    if (Math.abs(dx)>65 && Math.abs(dx)>Math.abs(dy)*1.5) navigateExercise(dx>0 ? 1 : -1);
+  });
+  dialog.addEventListener('pointercancel',()=>{touchStart=null;});
   resumeButton.onclick = () => { renderRun(); open(); updateResume(); };
   document.addEventListener('click', event => {
     const entry = event.target.closest('[data-timer-source]'); if (entry) { event.preventDefault(); launch(entry.dataset.timerSource); }

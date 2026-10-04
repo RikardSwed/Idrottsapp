@@ -84,6 +84,34 @@
       const before = this.index; this.tick();
       if (this.status === 'running' && before === this.index) this.advance('skipped');
     }
+    previousExerciseIndex() {
+      const current = this.phase;
+      if (!current) return null;
+      for (let i=this.index-1;i>=0;i--) {
+        if (this.plan[i].kind === 'work' && (current.kind !== 'work' || this.plan[i].id !== current.id)) {
+          const id=this.plan[i].id;
+          while(i>0 && (this.plan[i-1].kind !== 'work' || this.plan[i-1].id===id)) i--;
+          while(this.plan[i]?.kind !== 'work') i++;
+          return i+1; // One-based so phase zero remains a valid destination.
+        }
+      }
+      return null;
+    }
+    navigateExercise(direction) {
+      if (!['running','paused'].includes(this.status)) return;
+      const before=this.index; this.tick();
+      if (this.status==='done' || this.index!==before) return;
+      if (direction<0) {
+        const previous=this.previousExerciseIndex(); if (!previous) return;
+        if(this.phase.kind==='work' && !this.emomRest && this.reps) this.results.push({id:this.phase.id,set:this.phase.set,outcome:'stopped',reps:this.reps,seconds:this.elapsed/1000});
+        this.index=previous-1; this.elapsed=0; this.reps=0; this.emomRest=false;
+      } else {
+        const id=this.phase.id, leavingWork=this.phase.kind==='work';
+        this.advance('skipped');
+        while(this.phase && (this.phase.kind!=='work' || leavingWork && this.phase.id===id)) this.advance('skipped');
+      }
+      this.last=this.now();
+    }
     addRest(seconds = 15) {
       if (!this.phase || this.phase.kind !== 'rest' || !['running', 'paused'].includes(this.status)) return;
       const before = this.index; this.tick();
